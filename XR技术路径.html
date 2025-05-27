@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XR技术路径全景地图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #161c26; color: #d8e6fb; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 32px 16px; }
+        .header { text-align: center; margin-bottom: 34px; }
+        .header h1 { font-size: 2.4rem; font-weight: 800; color:#38f7fb; background: linear-gradient(90deg,#38f7fb,#a279ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+        .header p { color:#7bd5fa; margin-top:14px; }
+        .tech-tabs { display: flex; justify-content: center; gap: 20px; margin-bottom: 34px;}
+        .tab-button { background: rgba(56,247,251,0.08); color:#38f7fb; font-weight:600; border: none; padding:12px 38px; border-radius: 22px; font-size:1.07rem; cursor:pointer; transition:0.2s; }
+        .tab-button.active { background: linear-gradient(90deg,#38f7fb,#a279ff); color:#fff; box-shadow:0 4px 16px #38f7fb40; }
+        .tech-content { display:none; }
+        .tech-content.active { display:block; animation:fadeIn .5s;}
+        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+        .section-title { font-size:1.2rem; font-weight:700; color:#82b2f9; margin:36px 0 16px 0;}
+        .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px;}
+        @media (max-width:900px){ .tech-grid{ grid-template-columns: 1fr; } }
+        .card { background: #212942; border-radius: 18px; box-shadow: 0 8px 30px #0006; padding: 30px 24px 22px 24px; margin-bottom: 24px; border: 1.5px solid #38f7fb28;}
+        .card-title { font-size:1.18rem; color:#38f7fb; font-weight:700; margin-bottom:18px; }
+        .card-subtitle { color:#a3b3c8; font-weight:500; font-size:.98rem; margin-bottom:20px; }
+        .principle-card { margin-bottom:17px; }
+        .principle-title { color:#4fdcff; font-weight:700; margin-bottom:7px; font-size:1.08rem; }
+        .principle-text { color:#b4d4ff; }
+        .process-card { border-radius:12px; background: linear-gradient(90deg,#2e2143 60%,#322054 100%); padding:20px 20px 16px 24px; border-left: 6px solid #c864f7; margin-bottom:13px;}
+        .process-title { color:#e684fb; font-size:1.08rem; font-weight:700; margin-bottom:13px; }
+        .process-list { margin:0; padding:0; list-style:none;}
+        .process-item { display:flex; align-items: center; margin-bottom:12px; font-size:1.04rem;}
+        .circle-num { width:28px; height:28px; display:flex; align-items:center; justify-content:center; background:#b47cff; color:#fff; border-radius:50%; font-weight:700; font-size:1.01rem; margin-right:14px;}
+        .adv, .disadv { margin:8px 0 0 0; padding:9px 15px; border-radius:7px;}
+        .adv { background:rgba(35,255,150,0.07); border-left: 3px solid #0bdfb0; color:#0bdfb0;}
+        .disadv { background:rgba(255,80,80,0.10); border-left: 3px solid #f36868; color:#f36868;}
+        .spec-card { margin:18px 0; border:1.3px solid #38f7fb28; border-radius:12px; padding:16px 15px 13px 15px; background: #253153; box-shadow: 0 2px 9px #1c1e3c50;}
+        .spec-title { color:#59e1fa; font-size:1.07rem; font-weight:700; margin-bottom:7px;}
+        .spec-table { width:100%; }
+        .spec-row { display: flex; justify-content:space-between; align-items:center; padding:4px 0; }
+        .spec-key { color:#7be1fe; font-size:.97rem; }
+        .spec-value { color:#fff; font-weight:600; }
+        .industry-card { background:#253153; border-radius:14px; box-shadow:0 2px 10px #191c3555; padding:22px 15px 14px 15px; margin:13px 0 0 0;}
+        .industry-title { color:#8bbcff; font-weight:700; font-size:1.05rem; margin-bottom:13px;}
+        .industry-group { margin-bottom:14px;}
+        .industry-group-title { color:#96d5ff; font-weight:600; font-size:1.01rem; margin-bottom:7px;}
+        .industry-tags { display:flex; flex-wrap:wrap; gap:10px; }
+        .industry-tag { background: #1ec9ff35; color: #4fdcff; border-radius: 16px; padding: 5px 15px; font-size:.99rem; font-weight:600; border:1px solid #39c3f84d; transition:.17s;}
+        .industry-tag:hover { background:#14afff; color:#fff; }
+        @media (max-width:700px){
+          .container{padding:10px;}
+          .tech-grid{gap:14px;}
+          .card{padding:13px 4px;}
+          .industry-card{padding:10px 4px;}
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>XR 技术路径全景地图</h1>
+        <p>AR/VR主流技术、原理、参数、产业链全梳理</p>
+    </div>
+    <div class="tech-tabs">
+        <button class="tab-button active" data-tab="ar">AR技术</button>
+        <button class="tab-button" data-tab="vr">VR技术</button>
+        <button class="tab-button" data-tab="future">未来趋势</button>
+    </div>
+
+    <!-- AR -->
+    <div class="tech-content active" id="ar">
+        <div class="section-title">主流AR光学技术路径</div>
+        <div class="tech-grid">
+            <!-- Birdbath、SRG、VHG/PVG、几何波导、自由曲面卡片略，为简洁，可参照前文添加 -->
+            <div class="card">
+                <div class="card-title">Birdbath（鸟浴盆）</div>
+                <div class="card-subtitle">传统半反半透光学方案</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">通过半反半透镜反射微型显示屏（Micro OLED）图像到人眼，同时让外部光线通过。结构简单，亮度高。</div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>Micro OLED制造</li>
+                        <li class="process-item"><span class="circle-num">2</span>光学镜片切割与抛光</li>
+                        <li class="process-item"><span class="circle-num">3</span>分光镜镀膜</li>
+                        <li class="process-item"><span class="circle-num">4</span>模组组装与调校</li>
+                        <li class="process-item"><span class="circle-num">5</span>整机测试</li>
+                    </ol>
+                </div>
+                <div class="adv">视场角广、亮度高、成本低、成熟工艺</div>
+                <div class="disadv">体积较大、重影、透光率有限</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">XREAL Air 2 Pro</span><span class="spec-value">0.55" Micro OLED，1920×1080/eye，FOV 46°，72g</span></div>
+                        <div class="spec-row"><span class="spec-key">Rokid Air</span><span class="spec-value">0.23" Micro OLED，1920×1080/eye，FOV 43°，83g</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">Micro OLED</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">Sony</span>
+                            <span class="industry-tag">京东方</span>
+                            <span class="industry-tag">视涯科技</span>
+                            <span class="industry-tag">宏禧科技</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">光学材料</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">肖特玻璃</span>
+                            <span class="industry-tag">康宁</span>
+                            <span class="industry-tag">住友化学</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">组装/整机</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">歌尔</span>
+                            <span class="industry-tag">舜宇</span>
+                            <span class="industry-tag">XREAL</span>
+                            <span class="industry-tag">Rokid</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 光波导: SRG（消费级） -->
+            <div class="card">
+                <div class="card-title">光波导 - SRG表面浮雕光栅</div>
+                <div class="card-subtitle">主流消费级AR光波导方案之一</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">通过微纳光栅将Micro OLED/Micro LED图像耦合进玻璃波导，内部全反射传输，再用出射光栅投射到人眼。可做极薄镜片。</div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>光栅结构设计</li>
+                        <li class="process-item"><span class="circle-num">2</span>纳米压印/光刻</li>
+                        <li class="process-item"><span class="circle-num">3</span>刻蚀、薄膜沉积</li>
+                        <li class="process-item"><span class="circle-num">4</span>多层RGB组装</li>
+                        <li class="process-item"><span class="circle-num">5</span>整机组装调试</li>
+                    </ol>
+                </div>
+                <div class="adv">镜片极薄、可批量生产、外观接近普通眼镜</div>
+                <div class="disadv">光效低、色散明显、彩虹纹问题</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">HoloLens 2</span><span class="spec-value">LCoS+激光，2K/eye，FOV 52°，566g</span></div>
+                        <div class="spec-row"><span class="spec-key">雷鸟X2</span><span class="spec-value">Micro LED, FOV 50°</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">Micro OLED / Micro LED</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">JBD</span>
+                            <span class="industry-tag">Sony</span>
+                            <span class="industry-tag">TCL华星</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">光学玻璃</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">康宁</span>
+                            <span class="industry-tag">肖特</span>
+                            <span class="industry-tag">住友化学</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">波导/整机</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">苏大维格</span>
+                            <span class="industry-tag">WaveOptics</span>
+                            <span class="industry-tag">歌尔</span>
+                            <span class="industry-tag">舜宇</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 光波导: VHG/PVG体全息（消费级/研发） -->
+            <div class="card">
+                <div class="card-title">光波导 - VHG/PVG体全息光栅</div>
+                <div class="card-subtitle">高衍射效率单色/双色光波导方案</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">利用体积全息材料实现高效衍射，单色波长衍射效率极高，光损低。多色需多层堆叠。</div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>全息感光材料涂布</li>
+                        <li class="process-item"><span class="circle-num">2</span>激光曝光生成体全息光栅</li>
+                        <li class="process-item"><span class="circle-num">3</span>化学处理定型</li>
+                        <li class="process-item"><span class="circle-num">4</span>多层堆叠组装（多色）</li>
+                    </ol>
+                </div>
+                <div class="adv">衍射效率极高，光损耗小</div>
+                <div class="disadv">目前主流为单色，三色厚度大，未大规模商用</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">Digilens参考样机</span><span class="spec-value">Micro LED，FOV 50°，单色</span></div>
+                        <div class="spec-row"><span class="spec-key">云雀AR（研发）</span><span class="spec-value">Micro OLED，单色，FOV约40°，亮度>3000nits</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">Micro OLED / Micro LED</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">Sony</span>
+                            <span class="industry-tag">JBD</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">全息材料</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">灵犀微光</span>
+                            <span class="industry-tag">Digilens</span>
+                            <span class="industry-tag">Akonia</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">组装</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">鲲游光电</span>
+                            <span class="industry-tag">立讯精密</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 光波导: 几何波导（专业级） -->
+            <div class="card">
+                <div class="card-title">光波导 - 几何波导</div>
+                <div class="card-subtitle">微型反射镜阵列，专业级AR主流方案，自由曲面为其子类</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">利用波导片中微型反射镜阵列进行光线分束/耦合/均匀输出。无色散，耦合效率高，像差校正优异。</div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>高精密微结构设计</li>
+                        <li class="process-item"><span class="circle-num">2</span>超精密切割、车削</li>
+                        <li class="process-item"><span class="circle-num">3</span>多层镀膜</li>
+                        <li class="process-item"><span class="circle-num">4</span>阵列组装、调试</li>
+                    </ol>
+                </div>
+                <div class="adv">高耦合效率、无色散、像差控制好</div>
+                <div class="disadv">制造难度极高，量产良率低</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">Google EE2</span><span class="spec-value">LCoS/Micro OLED，FOV 57°，70g</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">Micro OLED / LCoS</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">Sony</span>
+                            <span class="industry-tag">京东方</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">几何波导/反射镜阵列</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">谷东科技</span>
+                            <span class="industry-tag">Lumus</span>
+                            <span class="industry-tag">理湃光晶</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 几何波导-自由曲面（特殊类型） -->
+            <div class="card">
+                <div class="card-title">自由曲面（几何波导子类）</div>
+                <div class="card-subtitle">通过特殊复杂曲面形状控制像差，属于专业级几何波导方案</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">采用自由曲面（非旋转对称曲线），对光线逐点精准修正，实现极佳成像质量。结构薄、轻，且FoV大。</div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>钻石车削/树脂注塑</li>
+                        <li class="process-item"><span class="circle-num">2</span>表面精密抛光</li>
+                        <li class="process-item"><span class="circle-num">3</span>多层镀膜</li>
+                        <li class="process-item"><span class="circle-num">4</span>组装校准</li>
+                    </ol>
+                </div>
+                <div class="adv">像差修正优异、结构极薄、可实现大视场</div>
+                <div class="disadv">工艺难度高，批量良率低</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">联想晨星New G2 Pro</span><span class="spec-value">Micro OLED，厚度5~10mm，FOV 55°，~75g</span></div>
+                        <div class="spec-row"><span class="spec-key">耐德佳模组</span><span class="spec-value">Micro OLED，厚度<10mm，FoV 50°+</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">Micro OLED</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">Sony</span>
+                            <span class="industry-tag">京东方</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">自由曲面/模组</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">耐德佳</span>
+                            <span class="industry-tag">联想</span>
+                            <span class="industry-tag">舜宇光学</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VR -->
+    <div class="tech-content" id="vr">
+        <div class="section-title">主流VR光学方案</div>
+        <div class="tech-grid">
+            <div class="card">
+                <div class="card-title">Pancake光学方案</div>
+                <div class="card-subtitle">目前消费级VR头显主流选择</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">
+                        利用多片偏振反射镜和折叠光路设计，将光线反射多次后成像于人眼，大幅缩短光路，实现更薄的VR头显。
+                    </div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>Micro OLED / LCD面板制造</li>
+                        <li class="process-item"><span class="circle-num">2</span>偏振膜组装与镀膜</li>
+                        <li class="process-item"><span class="circle-num">3</span>Pancake光学模组组装</li>
+                        <li class="process-item"><span class="circle-num">4</span>整机调校与测试</li>
+                    </ol>
+                </div>
+                <div class="adv">体积小、重量轻、支持屈光度调节、佩戴舒适</div>
+                <div class="disadv">光效损耗大、对偏振元件要求高、成本较高</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">Apple Vision Pro</span><span class="spec-value">Micro OLED, 3660×3200/eye, FOV 110°, 600g</span></div>
+                        <div class="spec-row"><span class="spec-key">Meta Quest Pro</span><span class="spec-value">LCD+Mini LED, 1800×1920/eye, FOV 106°, 722g</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">Micro OLED / LCD</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">Sony</span>
+                            <span class="industry-tag">京东方</span>
+                            <span class="industry-tag">视涯科技</span>
+                            <span class="industry-tag">JDI</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">偏振片</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">三利谱</span>
+                            <span class="industry-tag">3M</span>
+                            <span class="industry-tag">冠石科技</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">组装/整机</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">歌尔</span>
+                            <span class="industry-tag">立讯精密</span>
+                            <span class="industry-tag">舜宇光学</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <!-- 菲涅尔 Fresnel -->
+           <div class="card">
+                <div class="card-title">菲涅尔透镜方案</div>
+                <div class="card-subtitle">早期及部分入门级VR主流方案</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">
+                利用多圈同心圆台阶结构的菲涅尔透镜对光线聚焦和放大，实现较大视场角，简化体积和重量。</div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>PMMA/树脂透镜压模成型</li>
+                        <li class="process-item"><span class="circle-num">2</span>表面精密加工</li>
+                        <li class="process-item"><span class="circle-num">3</span>AR镀膜</li>
+                        <li class="process-item"><span class="circle-num">4</span>组装模组与调校</li>
+                    </ol>
+                </div>
+                <div class="adv">成本低、制造简单、视场角大</div>
+                <div class="disadv">杂散光、鬼影、像差明显</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">Meta Quest 2</span><span class="spec-value">LCD, 1832×1920/eye, FOV 90°, 503g</span></div>
+                        <div class="spec-row"><span class="spec-key">Pico 4</span><span class="spec-value">LCD, 2160×2160/eye, FOV 105°, 295g</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">LCD</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">京东方</span>
+                            <span class="industry-tag">天马微电子</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">菲涅尔镜片</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">舜宇光学</span>
+                            <span class="industry-tag">歌尔</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">组装/整机</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">歌尔</span>
+                            <span class="industry-tag">Pico</span>
+                            <span class="industry-tag">Meta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 未来趋势 -->
+    <div class="tech-content" id="future">
+        <div class="section-title">前沿&未来光学技术</div>
+        <div class="tech-grid">
+            <div class="card">
+                <div class="card-title">超表面光学（Metasurface）</div>
+                <div class="card-subtitle">亚波长纳米结构引领未来显示</div>
+                <div class="principle-card">
+                    <div class="principle-title">原理介绍</div>
+                    <div class="principle-text">
+                        利用亚波长的人工纳米结构（超表面）调控光传播，实现光的折射、反射、色散和聚焦能力的突破，有望实现极致轻薄和无色散的AR/VR光学。
+                    </div>
+                </div>
+                <div class="process-card">
+                    <div class="process-title">制作流程</div>
+                    <ol class="process-list">
+                        <li class="process-item"><span class="circle-num">1</span>半导体材料沉积（如氮化硅/氧化钛）</li>
+                        <li class="process-item"><span class="circle-num">2</span>电子束/纳米压印微纳图形制作</li>
+                        <li class="process-item"><span class="circle-num">3</span>反应离子刻蚀成型</li>
+                        <li class="process-item"><span class="circle-num">4</span>与显示模组集成</li>
+                    </ol>
+                </div>
+                <div class="adv">理论可消除色散、极致轻薄、光路可编程</div>
+                <div class="disadv">量产工艺难、损耗高、商用初期</div>
+                <div class="spec-card">
+                    <div class="spec-title">代表产品</div>
+                    <div class="spec-table">
+                        <div class="spec-row"><span class="spec-key">纳境科技样品</span><span class="spec-value">氮化硅/氧化钛超表面, AR演示模组</span></div>
+                        <div class="spec-row"><span class="spec-key">和光微样品</span><span class="spec-value">高折射率纳米结构, 开发板</span></div>
+                    </div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-title">产业链</div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">超表面材料</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">纳境科技</span>
+                            <span class="industry-tag">和光微</span>
+                            <span class="industry-tag">山河光电</span>
+                        </div>
+                    </div>
+                    <div class="industry-group">
+                        <div class="industry-group-title">纳米制造/集成</div>
+                        <div class="industry-tags">
+                            <span class="industry-tag">台积电</span>
+                            <span class="industry-tag">GlobalFoundries</span>
+                            <span class="industry-tag">中微公司</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 更多未来趋势卡片... -->
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.onclick = function() {
+                document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.tech-content').forEach(tc => tc.classList.remove('active'));
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            }
+        });
+    </script>
+</div>
+</body>
+</html>
